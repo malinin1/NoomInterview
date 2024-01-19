@@ -13,7 +13,8 @@ class FoodSearchRepository @Inject constructor(
     private val foodSearchApiService: FoodSearchApiService,
     private val schedulersProvider: SchedulersProvider) {
     fun searchForFood(searchQuery: String): Single<Response<List<FoodSearchResponse>>> {
-        return Single.error(IllegalAccessError())
+        return foodSearchApiService.search(searchQuery)
+            .subscribeOn(schedulersProvider.getIOScheduler())
     }
 
 

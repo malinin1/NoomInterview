@@ -2,6 +2,7 @@ package com.example.noominterview.application.dagger
 
 import android.app.Application
 import com.example.noominterview.application.ui.MainActivity
+import com.example.noominterview.foodsearch.dagger.FoodSearchComponent
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -19,5 +20,6 @@ interface ApplicationComponent {
         fun build(): ApplicationComponent
     }
 
+    fun foodSearchComponent(): FoodSearchComponent.Builder
     fun inject(activity: MainActivity)
 }
