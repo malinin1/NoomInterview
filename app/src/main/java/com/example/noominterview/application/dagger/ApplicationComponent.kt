@@ -1,7 +1,7 @@
 package com.example.noominterview.application.dagger
 
 import android.app.Application
-import com.example.noominterview.application.MainActivity
+import com.example.noominterview.application.ui.MainActivity
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton

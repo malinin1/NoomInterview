@@ -1,4 +1,4 @@
-package com.example.noominterview.application
+package com.example.noominterview.util
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Scheduler
