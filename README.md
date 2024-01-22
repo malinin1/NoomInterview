@@ -18,7 +18,7 @@ and the implementation would need to be completed for a real application.
 
 In production, we would probably want to go with Dagger.Android or Hilt
 to reduce the Dagger boilerplate and standardize the injection of 
-Dagger components. 
+Android components. 
 
 In production, we could consider backgrounding the initialization of 
 expensive components; this would come with the need to consider 
