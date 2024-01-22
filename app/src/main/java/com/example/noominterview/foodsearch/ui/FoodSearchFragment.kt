@@ -17,7 +17,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding4.widget.textChanges
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class FoodSearchFragment: Fragment() {
@@ -63,7 +62,7 @@ class FoodSearchFragment: Fragment() {
 
         binding.foodSearchEditText.textChanges()
             .subscribe {
-            viewModel.searchQueryUpdted(it.toString())
+            viewModel.searchQueryUpdated(it.toString())
         }.addTo(disposable)
 
         observeViewState()

@@ -5,8 +5,13 @@ import com.example.noominterview.application.ui.MainActivity
 import com.example.noominterview.foodsearch.dagger.FoodSearchComponent
 import dagger.BindsInstance
 import dagger.Component
+import javax.inject.Scope
 import javax.inject.Singleton
 
+
+@Scope
+@Retention(value = AnnotationRetention.RUNTIME)
+annotation class ActivityScope
 @Singleton
 @Component(modules = [ApplicationModule::class, NetworkModule::class, SubcomponentsModule::class])
 interface ApplicationComponent {

@@ -1,14 +1,11 @@
 package com.example.noominterview.foodsearch.dagger
 
+import com.example.noominterview.application.dagger.ActivityScope
 import com.example.noominterview.foodsearch.ui.FoodSearchFragment
 import dagger.Subcomponent
-import javax.inject.Scope
 
-@Scope
-@Retention(value = AnnotationRetention.RUNTIME)
-annotation class FoodSearchScope
 
-@FoodSearchScope
+@ActivityScope
 @Subcomponent(modules = [FoodSearchNetworkModule::class])
 interface FoodSearchComponent {
 

@@ -16,7 +16,10 @@ class NoomApplication: Application() {
             return applicationComponent
         }
 
-        // TODO Explain scopes/lifecycles
+        // Somewhat contrived to have subcomponents with such a small application,
+        // but added as an example of how to split up Dagger components as the application scales
+        // In a real application, we would need to manage releasing the subcomponent when
+        // navigating away from its scope.
         fun getFoodSearchComponent(): FoodSearchComponent {
             foodSearchComponent?.let {
                 return it

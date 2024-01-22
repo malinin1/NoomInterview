@@ -4,6 +4,6 @@ import androidx.lifecycle.ViewModel
 import javax.inject.Inject
 
 // Activity-level ViewModel
-// Could be used e.g. to handle navigation events from fragments; empty for now
+// Intended to handle e.g. navigation events between child fragments
 class MainActivityViewModel @Inject constructor(): ViewModel() {
 }

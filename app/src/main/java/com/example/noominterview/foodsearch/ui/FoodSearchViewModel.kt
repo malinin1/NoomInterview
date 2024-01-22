@@ -7,12 +7,9 @@ import com.example.noominterview.foodsearch.data.FoodSearchRepository
 import com.example.noominterview.foodsearch.data.FoodSearchResponse
 import com.example.noominterview.util.SchedulersProvider
 import com.example.noominterview.util.SingleLiveEvent
-import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.kotlin.addTo
 import io.reactivex.rxjava3.subjects.BehaviorSubject
-import retrofit2.Response
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -64,7 +61,7 @@ class FoodSearchViewModel @Inject constructor(
 
     // Assumed that will only be called on main thread from views
     // Can discuss more sophisticated concurrency if needed
-    fun searchQueryUpdted(searchQuery: String) {
+    fun searchQueryUpdated(searchQuery: String) {
         if (searchQuery.length < MINIMUM_QUERY_LENGTH) {
             _foodSearchLiveData.value = TypeThreeCharacters()
             return
