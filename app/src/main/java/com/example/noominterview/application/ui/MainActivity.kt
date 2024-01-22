@@ -32,4 +32,12 @@ class MainActivity : AppCompatActivity() {
                 .commit()
         }
     }
+
+    override fun finish() {
+        // This is contrived; intended as an example of releasing a scoped Dagger component
+        // when we finish using it. In an app with one screen, it's hard to build real
+        // logic for managing Dagger scopes.
+        NoomApplication.releaseFoodSearchComponent()
+        super.finish()
+    }
 }

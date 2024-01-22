@@ -17,9 +17,8 @@ class NoomApplication: Application() {
         }
 
         // Somewhat contrived to have subcomponents with such a small application,
-        // but added as an example of how to split up Dagger components as the application scales
-        // In a real application, we would need to manage releasing the subcomponent when
-        // navigating away from its scope.
+        // but added as an example of how to split up Dagger components as the application scales.
+        // Would need to handle concurrency if this were to be called off the main thread.
         fun getFoodSearchComponent(): FoodSearchComponent {
             foodSearchComponent?.let {
                 return it
@@ -30,6 +29,11 @@ class NoomApplication: Application() {
                 .build()
             this.foodSearchComponent = foodSearchComponent
             return foodSearchComponent
+        }
+
+        // Contrived logic for an example of releasing a Dagger component when finished with it
+        fun releaseFoodSearchComponent() {
+            this.foodSearchComponent = null
         }
     }
     override fun onCreate() {
