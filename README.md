@@ -14,11 +14,6 @@ In production, we would probably want to go with Dagger.Android or Hilt
 to reduce the Dagger boilerplate and standardize the injection of 
 Android components. 
 
-In production, we could consider backgrounding the initialization of 
-expensive components; this would come with the need to consider 
-concurrency issues as well. Moving the Dagger component initialization
-to the background now seemed like over-engineering.
-
 Loading/Error states are currently not implemented in the UI; however the 
 code is designed to allow them to be added easily.
 
