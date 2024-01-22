@@ -22,8 +22,8 @@ Android components.
 
 In production, we could consider backgrounding the initialization of 
 expensive components; this would come with the need to consider 
-concurrency issues as well. Moving the current Dagger component initialization
-to the background and dealing with concurrency now seemed like over-engineering.
+concurrency issues as well. Moving the Dagger component initialization
+to the background now seemed like over-engineering.
 
 Loading/Error states are currently not implemented in the UI; however the 
 code is designed to allow them to be added easily.
