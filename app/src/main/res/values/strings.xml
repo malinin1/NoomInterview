@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">NoomInterview</string>
     <string name="portion_size">Portion size: %d</string>
+    <string name="type_three_characters">To see search results, type at least 3 characters.</string>
 </resources>

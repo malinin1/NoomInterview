@@ -6,7 +6,7 @@ import com.example.noominterview.databinding.ItemFoodSearchBinding
 import com.example.noominterview.foodsearch.data.FoodSearchResponse
 
 class FoodSearchViewHolder(private val binding: ItemFoodSearchBinding) : ViewHolder(binding.root) {
-    fun bind(foodSearchResult: FoodSearchResponse) {
+    fun bind(foodSearchResult: FoodSearchResponse, listener: (FoodSearchResponse) -> Unit) {
         binding.itemBrandTextView.text = foodSearchResult.brand
         binding.itemNameTextView.text = foodSearchResult.name
         binding.itemPortionTextView.text = itemView.resources.getString(
@@ -15,5 +15,8 @@ class FoodSearchViewHolder(private val binding: ItemFoodSearchBinding) : ViewHol
             R.plurals.calories,
             foodSearchResult.calories,
             foodSearchResult.calories)
+        binding.root.setOnClickListener {
+            listener.invoke(foodSearchResult)
+        }
     }
 }

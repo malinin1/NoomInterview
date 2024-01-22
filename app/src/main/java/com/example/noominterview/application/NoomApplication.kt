@@ -10,38 +10,30 @@ class NoomApplication: Application() {
 
     companion object {
         private lateinit var applicationComponent: ApplicationComponent
+        private var foodSearchComponent: FoodSearchComponent? = null
 
         fun getApplicationComponent(): ApplicationComponent {
             return applicationComponent
         }
-    }
 
-    private var foodSearchComponent: FoodSearchComponent? = null
+        // TODO Explain scopes/lifecycles
+        fun getFoodSearchComponent(): FoodSearchComponent {
+            foodSearchComponent?.let {
+                return it
+            }
+            val foodSearchComponent = applicationComponent
+                .foodSearchComponent()
+                .networkModule(FoodSearchNetworkModule())
+                .build()
+            this.foodSearchComponent = foodSearchComponent
+            return foodSearchComponent
+        }
+    }
     override fun onCreate() {
         initDaggerComponent()
         super.onCreate()
     }
 
-    fun getOrCreateFoodSearchComponent(): FoodSearchComponent {
-        synchronized(this) {
-            return foodSearchComponent?.let {
-                it
-            } ?: kotlin.run {
-                val foodSearchComponent = applicationComponent
-                    .foodSearchComponent()
-                    .networkModule(FoodSearchNetworkModule())
-                    .build()
-                this.foodSearchComponent = foodSearchComponent
-                foodSearchComponent
-            }
-        }
-    }
-
-    fun releaseFoodSearchComponent() {
-        synchronized(this) {
-            this.foodSearchComponent = null
-        }
-    }
     private fun initDaggerComponent() {
         applicationComponent = DaggerApplicationComponent.builder()
             .bindApplication(this)

@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="food_search_bar_height">40dp</dimen>
+    <dimen name="rounded_background_corner">16dp</dimen>
+    <dimen name="rounded_background_border">2dp</dimen>
+    <dimen name="default_padding">16dp</dimen>
+    <dimen name="default_margin">8dp</dimen>
+    <dimen name="list_vertical_margin">4dp</dimen>
 </resources>

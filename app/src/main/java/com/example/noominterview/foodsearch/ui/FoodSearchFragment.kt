@@ -11,6 +11,9 @@ import com.example.noominterview.application.NoomApplication
 import com.example.noominterview.databinding.FragmentFoodSearchBinding
 import com.example.noominterview.util.SchedulersProvider
 import com.example.noominterview.util.ViewModelFactory
+import com.example.noominterview.util.hide
+import com.example.noominterview.util.show
+import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding4.widget.textChanges
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
@@ -18,10 +21,6 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class FoodSearchFragment: Fragment() {
-
-    companion object {
-        private const val SEARCH_BAR_DEBOUNCE_MS = 100L
-    }
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory<FoodSearchViewModel>
@@ -40,8 +39,7 @@ class FoodSearchFragment: Fragment() {
         return _binding!!
     }
     override fun onAttach(context: Context) {
-        (requireActivity().application as NoomApplication)
-            .getOrCreateFoodSearchComponent()
+        NoomApplication.getFoodSearchComponent()
             .inject(this)
         super.onAttach(context)
     }
@@ -57,13 +55,13 @@ class FoodSearchFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        this.adapter = FoodSearchAdapter()
+        this.adapter = FoodSearchAdapter({ foodSearchResponse ->
+            viewModel.searchResultTapped(foodSearchResponse)
+        })
         binding.foodSearchRecyclerView.adapter = adapter
         binding.foodSearchRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         binding.foodSearchEditText.textChanges()
-            .debounce(SEARCH_BAR_DEBOUNCE_MS, TimeUnit.MILLISECONDS)
-            .observeOn(schedulersProvider.getMainThreadScheduler())
             .subscribe {
             viewModel.searchQueryUpdted(it.toString())
         }.addTo(disposable)
@@ -75,16 +73,26 @@ class FoodSearchFragment: Fragment() {
         viewModel.foodSearchLiveData.observe(viewLifecycleOwner) {
             when(it) {
                 is FoodSearchError -> {
-
+                    // Display something for error state
                 }
                 is FoodSearchSuccess -> {
                     adapter?.submitList(it.results)
+                    binding.foodSearchHint.hide()
                 }
                 is TypeThreeCharacters -> {
-
+                    binding.foodSearchHint.show()
                 }
             }
         }
+
+        viewModel.foodTappedEvent.observe(viewLifecycleOwner) {
+            showFoodNameSnackbar(it)
+        }
+    }
+
+    private fun showFoodNameSnackbar(foodName: String) {
+        Snackbar.make(binding.root, foodName, Snackbar.LENGTH_SHORT)
+            .show()
     }
 
     override fun onDestroyView() {
