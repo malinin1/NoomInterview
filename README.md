@@ -4,17 +4,11 @@ production.
 
 With that, there are a few things I wanted to call out: 
 
-In a real application, we would need to manage the Dagger scope 
-for FoodSearchComponent (i.e., initialize the component when entering 
-the scope, and release the component when exiting the scope).
-Currently, we do not release FoodSearchComponent, and ActivityScope
-functionally is the same as the parent @Singleton scope.
-In production, we would not have a child scope share the same 
-lifetime as @Singleton. 
-The separate FoodSearchComponent Dagger component and separate
-@ActivityScope are intended to show the thought process of how to split up 
-components as the app scales; the implementation is knowingly simplified
-and the implementation would need to be completed for a real application. 
+Using @ActivityScope for the food search Dagger component is contrived.
+In a larger application, we could go over the possibilities for scoping
+feature components. If Dagger component initialization were to be done off 
+the main thread, we would also need to handle concurrency. The Dagger code
+in its current form would need changes to scale to a large application.
 
 In production, we would probably want to go with Dagger.Android or Hilt
 to reduce the Dagger boilerplate and standardize the injection of 
