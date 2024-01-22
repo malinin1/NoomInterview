@@ -8,7 +8,7 @@ In a real application, we would need to manage the Dagger scope
 for FoodSearchComponent (i.e., initialize the component when entering 
 the scope, and release the component when exiting the scope).
 Currently, we do not release FoodSearchComponent, and ActivityScope
-functionall isy the same as the parent @Singleton scope.
+functionally is the same as the parent @Singleton scope.
 In production, we would not have a child scope share the same 
 lifetime as @Singleton. 
 The separate FoodSearchComponent Dagger component and separate
